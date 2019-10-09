@@ -1,0 +1,30 @@
+import { Result } from './result';
+import * as _ from 'lodash';
+
+export class Scoreboard {
+    private results: Result[] = [];
+
+    addResult(newResult: Result): void {
+        this.results.push(newResult);
+
+        let allCapsName: string = _.upperCase(newResult.playerName);
+        console.log(`${allCapsName}:${newResult.score}`);
+    }
+
+    updateScoreboard(): void {
+
+        let output: string = '<h2>Scoreboard</h2>';
+
+        for (let index = 0; index < this.results.length; index++) {
+
+            let result: Result = this.results[index];
+            output += '<h4>';
+            output += result.playerName + ': ' + result.score + ' /' + result.problemCount;
+            output += '</h4>';
+        }
+
+        let scoresElement: HTMLElement = document.getElementById('scores')!;
+        scoresElement.innerHTML = output;
+
+    }
+}
